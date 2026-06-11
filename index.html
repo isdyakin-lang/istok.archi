@@ -75,12 +75,13 @@
         .hero-content { position: relative; z-index: 2; width: 100%; }
         .hero h1 {
             font-family: var(--font-display);
-            /* ИСПРАВЛЕНИЕ: Шрифт немного уменьшен, чтобы избежать переноса на десктопе */
+            /* Шрифт немного уменьшен, чтобы избежать переноса на десктопе */
             font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
             line-height: 1; 
             margin: 0;
             letter-spacing: 0.05em; 
             text-transform: uppercase;
+            /* Переносы убраны из общих стилей */
         }
 
         /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */
@@ -220,8 +221,9 @@
             }
 
             .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+            
+            /* ИСПРАВЛЕНИЕ: Включаем умные переносы только на мобильных */
             .hero h1 {
-                /* Включаем умные переносы только на мобильных */
                 -webkit-hyphens: auto;
                 -ms-hyphens: auto;
                 hyphens: auto;

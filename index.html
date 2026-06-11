@@ -75,7 +75,6 @@
         .hero-content { position: relative; z-index: 2; width: 100%; }
         .hero h1 {
             font-family: var(--font-display);
-            /* ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ: Минимальный размер шрифта сильно уменьшен для гарантии */
             font-size: clamp(1.8rem, 12vw, 10rem); 
             overflow-wrap: break-word;
             word-break: break-all;
@@ -172,4 +171,278 @@
         .results-list li:last-child { margin-bottom: 0; }
         
         .carousel { position: relative; overflow: hidden; border-radius: 4px; }
-        .carousel-track {
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-slide { min-width: 100%; box-sizing: border-box; }
+        .carousel-slide img { width: 100%; height: 500px; object-fit: cover; }
+        .carousel-button {
+            position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,0,0,0.3);
+            color: white; border-radius: 50%; border: none; font-size: 2.5rem;
+            cursor: pointer; width: 60px; height: 60px; z-index: 10; transition: background-color 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .carousel-button:hover { background-color: rgba(0,0,0,0.6); }
+        .carousel-button--left { left: 10px; padding-right: 4px; }
+        .carousel-button--right { right: 10px; padding-left: 4px; }
+
+        /* БЛОК "КОНТАКТЫ" */
+        .contacts-section { text-align: center; }
+        .contacts-section p { font-size: 1.2rem; color: #555; margin-top: -1rem; }
+        
+        /* --- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+
+        /* Планшеты и небольшие десктопы (до 992px) */
+        @media (max-width: 992px) {
+            .organizer-grid { grid-template-columns: 1fr; text-align: center; }
+            .organizer-photo { max-width: 300px; margin: 0 auto; }
+            .organizer-info { margin-top: 2rem; }
+            .partners-info { margin-top: 2rem; }
+            .partner-item { justify-content: center; }
+            .results-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .carousel { order: 1; }
+            .results-content { order: 2; }
+        }
+
+        /* Телефоны и планшеты в портретной ориентации (до 768px) */
+        @media (max-width: 768px) {
+            body { font-size: 16px; line-height: 1.6; }
+            .container { padding: 0 15px; }
+            
+            h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
+            h3 { font-size: 1.8rem; }
+            
+            main .container > section {
+                padding-top: 5rem;
+            }
+            .organizer-section { 
+                padding: 4rem 15px; 
+            }
+            .conditions-strip { 
+                margin-top: 5rem;
+            }
+
+            .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+
+            .cta-bar { font-size: 1.5rem; padding: 20px 15px; }
+            
+            .tasks-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .task-card { padding: 1.5rem; }
+
+            .stage-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .stage-date { font-size: 1.5rem; }
+            .stage-description { font-size: 1rem; }
+            
+            .conditions-strip p { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+            .conditions-strip span { margin: 0.5rem 0; }
+
+            .outcomes-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+            .carousel-slide img { height: 350px; }
+            
+            .contacts-section {
+                padding-bottom: 4rem;
+            }
+        }
+
+        /* Маленькие телефоны (до 480px) */
+        @media (max-width: 480px) {
+            h2 { font-size: 2.2rem; }
+            .cta-bar { font-size: 1.2rem; letter-spacing: 0.05em; }
+            
+            .carousel-slide img { height: 250px; }
+            .carousel-button { width: 45px; height: 45px; font-size: 1.8rem; }
+            .carousel-button--left { left: 5px; }
+            .carousel-button--right { right: 5px; }
+
+            .contacts-section p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewport-wrapper">
+        <header class="hero">
+            <div class="hero-background"></div>
+            <div class="hero-content"><h1>Зодчество<br>Вологодчины</h1></div>
+        </header>
+        <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar">
+            <div class="marquee-text">
+                <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
+                <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
+            </div>
+        </a>
+    </div>
+
+    <main>
+        <section class="organizer-section">
+            <div class="container organizer-grid">
+                <img src="images/organizer-photo.jpg" alt="Фотография Максима Латынина" class="organizer-photo">
+                <div class="organizer-info">
+                    <h3>Латынин Максим Валерьевич</h3>
+                    <p>Руководитель экспедиции. Архитектор, старший преподаватель ГУЗ и ЧГУ.</p>
+                    <p>Автор научных публикаций по архитектуре Вологодской области. Организатор студенческой экспедиции «АрхиВыезд 2025», нацеленной на глубокое исследование и переосмысление локальных архитектурных кодов.</p>
+                </div>
+                <div class="partners-info">
+                    <div class="partners-list">
+                        <h4>Партнеры</h4>
+                        <div class="partner-item"><p><a href="https://openrussia.rsv.ru/" target="_blank">Программа «Открываем Россию заново»</a></p></div>
+                    </div>
+                    <div class="partners-list">
+                        <h4>Информационные партнеры</h4>
+                        <div class="partner-item">
+                            <img src="images/logo-vataga.jpg" alt="Логотип Ватага">
+                            <a href="https://t.me/vataganew" target="_blank">!ВАТАГА</a>
+                        </div>
+                        <div class="partner-item">
+                            <img src="images/logo-chernuha.jpg" alt="Логотип Чернуха">
+                            <a href="https://t.me/chernuhaguz" target="_blank">Чернуха</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="description">
+                <h2>Описание</h2>
+                <p>Современная застройка Вологодской области испытывает дефицит аутентичных решений. Новые микрорайоны обезличены по сравнению с историческими кварталами. Кейс экспедиции — разработка эскизных проектов для современного жилья, которые опираются на локальный архитектурный контекст, наследие и передовые CLT-технологии, изготавливаемые в той же области.</p>
+                <div class="stages-grid">
+                    <div class="stage-item"><div class="stage-date">11 – 25 июня 2026</div><div class="stage-description">Подача портфолио и мотивационных писем</div></div>
+                    <div class="stage-item"><div class="stage-date">1 – 3 июля 2026</div><div class="stage-description">Подведение итогов, формирование команды</div></div>
+                    <div class="stage-item"><div class="stage-date">1 – 13 сентября 2026</div><div class="stage-description">Даты экспедиции<small>(подробности чуть позже, возможно смещение дат на 1-2 дня)</small></div></div>
+                </div>
+            </section>
+        </div>
+
+        <section class="conditions-strip">
+            <p>Организаторы покрывают расходы на <span>Переезд</span> <span>Проживание</span> <span>Питание</span></p>
+        </section>
+
+        <div class="container">
+            <section id="tasks">
+                <h2>Задачи команд</h2>
+                <div class="tasks-grid">
+                    <div class="task-card"><h3>Команда 1</h3><p>Разработка проекта индивидуального жилого дома, который переосмысляет традиционный северный дом и адаптирует его для современной семьи с использованием CLT-панелей.</p></div>
+                    <div class="task-card"><h3>Команда 2</h3><p>Проектирование блокированного жилого дома (квадрохауса) на четыре семьи. Основная задача — создать комфортное и экономичное жилье с сохранением локальной идентичности.</p></div>
+                    <div class="task-card"><h3>Команда 3</h3><p>Создание концепции малоэтажного или среднеэтажного жилого дома (3-5 этажей) для городских кварталов, который гармонично вписывается в существующую застройку.</p></div>
+                </div>
+            </section>
+
+            <section id="roles">
+                <h2>Кого мы ищем</h2>
+                <p>Мы формируем 3 междисциплинарные команды. База экспедиции находится в Государственном университете по землеустройству (ГУЗ), но мы приглашаем к участию студентов и молодых специалистов со всей страны, независимо от вашего вуза.</p>
+                <p>Для участия необходим рабочий ноутбук и портфолио с релевантными проектами.</p>
+                <div class="team-grid">
+                    <div class="team-role"><h4>Архитектор-проектировщик</h4><p>Разработка функциональных планировок. Обязательное владение Revit или Archicad.</p></div>
+                    <div class="team-role"><h4>Архитектор-художник</h4><p>Разработка фасадных и объёмных решений. Уверенное владение SketchUp или Rhinoceros.</p></div>
+                    <div class="team-role"><h4>Визуализатор</h4><p>Создание фотореалистичных рендеров. Владение 3ds Max + Corona, Lumion или Enscape.</p></div>
+                    <div class="team-role"><h4>Исследователь</h4><p>Анализ, общение с экспертами, написание текстов. Навыки социолога или урбаниста.</p></div>
+                    <div class="team-role"><h4>Графический дизайнер</h4><p>Владение Adobe InDesign, Photoshop, Illustrator для фотофиксации, инфографики и вёрстки итогового альбома.</p></div>
+                    <div class="team-role"><h4>Лидер проектной группы</h4><p>Опыт управления командой, навыки постановки задач и контроля сроков.</p></div>
+                </div>
+            </section>
+            
+            <section id="outcomes">
+                <h2>Итоги экспедиции</h2>
+                <ul class="outcomes-grid">
+                    <li>Итоговый альбом с тремя проектными решениями, аналитикой и визуализациями.</li>
+                    <li>Сертификат об участии в программе «Открываем Россию заново».</li>
+                    <li>Прямая работа с администрацией города и реальный шанс на реализацию лучших проектов.</li>
+                    <li>Сильный реальный кейс для вашего профессионального портфолио.</li>
+                    <li>Возможность публикации лучших работ в профильных архитектурных медиа.</li>
+                    <li>Опыт работы в междисциплинарной команде над сложной задачей.</li>
+                </ul>
+            </section>
+
+            <section id="last-year">
+                <h2>Как это было: Экспедиция 2025</h2>
+                <div class="results-grid">
+                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg"></div>
+                    <div class="results-content">
+                        <h3>Итоги прошлой практики</h3>
+                        <ul class="results-list">
+                            <li>Начато взаимодействие с Управлением архитектуры Череповца.</li>
+                            <li>Проведен совместный мастер-класс для студентов и практиков.</li>
+                            <li>Результаты легли в основу научных публикаций и докладов.</li>
+                            <li>Сформирована основа для более масштабной экспедиции 2026 года.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contacts-section">
+                <h2>Контакты</h2>
+                <p>По возникшим вопросам пишите на почту <a href="mailto:mv@latynin.org">mv@latynin.org</a> или в Telegram: <a href="https://t.me/MAX_V_L" target="_blank">@MAX_V_L</a></p>
+            </section>
+        </div>
+    </main>
+    
+    <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar cta-bar--static">
+        Подать заявку до 25 июня
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function createCarousel(container) {
+                const imageUrls = container.dataset.images.split(',').filter(url => url.trim() !== '');
+                if (imageUrls.length === 0) return;
+                
+                const track = document.createElement('div'); 
+                track.className = 'carousel-track';
+                
+                imageUrls.forEach(url => {
+                    const slide = document.createElement('div'); 
+                    slide.className = 'carousel-slide';
+                    const img = document.createElement('img'); 
+                    img.src = url.trim();
+                    img.alt = 'Фото с прошлой экспедиции';
+                    slide.appendChild(img); 
+                    track.appendChild(slide);
+                });
+                
+                const prevButton = document.createElement('button'); 
+                prevButton.className = 'carousel-button carousel-button--left'; 
+                prevButton.innerHTML = '&#10094;';
+                prevButton.setAttribute('aria-label', 'Предыдущий слайд');
+
+                const nextButton = document.createElement('button'); 
+                nextButton.className = 'carousel-button carousel-button--right'; 
+                nextButton.innerHTML = '&#10095;';
+                nextButton.setAttribute('aria-label', 'Следующий слайд');
+                
+                container.appendChild(track); 
+                container.appendChild(prevButton); 
+                container.appendChild(nextButton);
+                
+                let currentIndex = 0;
+                
+                const updateCarousel = () => {
+                    if (!track.querySelector('.carousel-slide')) return;
+                    const slideWidth = track.querySelector('.carousel-slide').getBoundingClientRect().width;
+                    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+                };
+                
+                prevButton.addEventListener('click', () => { 
+                    currentIndex = currentIndex === 0 ? imageUrls.length - 1 : currentIndex - 1; 
+                    updateCarousel(); 
+                });
+                
+                nextButton.addEventListener('click', () => { 
+                    currentIndex = currentIndex === imageUrls.length - 1 ? 0 : currentIndex + 1; 
+                    updateCarousel(); 
+                });
+                
+                window.addEventListener('resize', () => { 
+                    track.style.transition = 'none'; 
+                    updateCarousel(); 
+                    track.offsetHeight;
+                    track.style.transition = ''; 
+                });
+                
+                updateCarousel();
+            }
+            
+            document.querySelectorAll('.carousel').forEach(createCarousel);
+        });
+    </script>
+</body>
+</html>

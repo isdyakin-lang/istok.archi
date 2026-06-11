@@ -76,12 +76,15 @@
         .hero h1 {
             font-family: var(--font-display);
             font-size: clamp(1.8rem, 12vw, 10rem); 
-            overflow-wrap: break-word;
-            word-break: break-all;
             line-height: 1; 
             margin: 0;
             letter-spacing: 0.05em; 
             text-transform: uppercase;
+            
+            /* ИСПРАВЛЕНИЕ: Добавлен умный перенос по слогам для русского языка */
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
         }
 
         /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */

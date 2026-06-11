@@ -50,7 +50,7 @@
             font-size: 17px;
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-            min-width: 320px; /* Предотвращает "ломание" на очень узких экранах */
+            min-width: 320px;
         }
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
         h2, h3 { font-family: var(--font-display); letter-spacing: 0.05em; }
@@ -65,7 +65,7 @@
         /* ГЛАВНЫЙ ЭКРАН */
         .hero {
             flex-grow: 1; display: flex; justify-content: center; align-items: center; text-align: center;
-            color: white; position: relative; background-color: var(--color-dark-bg); box-sizing: border-box; padding: 40px;
+            color: white; position: relative; background-color: var(--color-dark-bg); box-sizing: border-box; padding: 20px;
         }
         .hero-background {
             position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
@@ -75,7 +75,9 @@
         .hero-content { position: relative; z-index: 2; }
         .hero h1 {
             font-family: var(--font-display);
-            font-size: clamp(3.5rem, 15vw, 10rem); line-height: 0.9; margin: 0;
+            /* Изменен clamp для лучшего сжатия на мобильных */
+            font-size: clamp(2.8rem, 12vw, 10rem); 
+            line-height: 1; margin: 0;
             letter-spacing: 0.05em; text-transform: uppercase;
         }
 
@@ -97,7 +99,7 @@
         /* Стили для статичной кнопки внизу */
         .cta-bar--static {
             text-align: center;
-            white-space: normal; /* Разрешаем перенос текста на мобильных */
+            white-space: normal;
         }
 
         /* БЛОК РУКОВОДИТЕЛЯ И ПАРТНЕРОВ */
@@ -160,7 +162,7 @@
         }
 
         /* БЛОК "КАК ЭТО БЫЛО" И КАРУСЕЛЬ */
-        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 3rem;}
+        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
         .results-list { list-style-type: '✓ '; padding-left: 20px; margin: 0;}
         .results-list li { margin-bottom: 1rem; font-size: 1.1rem; font-weight: 700; }
         .results-list li:last-child { margin-bottom: 0; }
@@ -180,16 +182,8 @@
         .carousel-button--right { right: 10px; padding-left: 4px; }
 
         /* БЛОК "КОНТАКТЫ" */
-        .contacts-section {
-            text-align: center;
-            margin-top: 6rem;
-            padding-bottom: 4rem;
-        }
-        .contacts-section p {
-            font-size: 1.2rem;
-            color: #555;
-            margin-top: -1rem;
-        }
+        .contacts-section { text-align: center; }
+        .contacts-section p { font-size: 1.2rem; color: #555; margin-top: -1rem; }
         
         /* --- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
 
@@ -201,23 +195,32 @@
             .partners-info { margin-top: 2rem; }
             .partner-item { justify-content: center; }
             .results-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .carousel { order: 1; } /* Карусель будет первой */
-            .results-content { order: 2; } /* Текст после карусели */
+            .carousel { order: 1; }
+            .results-content { order: 2; }
         }
 
         /* Телефоны и планшеты в портретной ориентации (до 768px) */
         @media (max-width: 768px) {
             body { font-size: 16px; line-height: 1.6; }
             .container { padding: 0 15px; }
-            h2 { font-size: 2.8rem; margin: 4rem 0 1.5rem 0; }
+            
+            /* Уменьшаем заголовки и убираем их верхний отступ */
+            h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
             h3 { font-size: 1.8rem; }
             
-            .hero { padding: 20px; }
+            /* Добавляем "воздух" между секциями на мобильных */
+            main .container > section {
+                padding-top: 4rem;
+            }
+            main .container > section:first-of-type {
+                padding-top: 3rem; /* Для первой секции отступ чуть меньше */
+            }
+
             .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
 
             .cta-bar { font-size: 1.5rem; padding: 20px 15px; }
 
-            .organizer-section { padding: 3rem 0; }
+            .organizer-section { padding: 3rem 15px; }
             .tasks-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .task-card { padding: 1.5rem; }
 
@@ -225,7 +228,7 @@
             .stage-date { font-size: 1.5rem; }
             .stage-description { font-size: 1rem; }
             
-            .conditions-strip { padding: 2rem 1rem; }
+            .conditions-strip { margin-top: 3rem; padding: 2rem 1rem; }
             .conditions-strip p { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
             .conditions-strip span { margin: 0.5rem 0; }
 
@@ -233,7 +236,10 @@
 
             .carousel-slide img { height: 350px; }
             
-            .contacts-section { margin-top: 4rem; }
+            .contacts-section {
+                padding-top: 4rem;
+                padding-bottom: 3rem;
+            }
         }
 
         /* Маленькие телефоны (до 480px) */
@@ -255,7 +261,8 @@
     <div class="viewport-wrapper">
         <header class="hero">
             <div class="hero-background"></div>
-            <div class="hero-content"><h1>Зодчество Вологодчины</h1></div>
+            <!-- Добавлен <br> для гарантированного переноса на мобильных -->
+            <div class="hero-content"><h1>Зодчество<br>Вологодчины</h1></div>
         </header>
         <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar">
             <div class="marquee-text">
@@ -265,7 +272,6 @@
         </a>
     </div>
 
-    <!-- Начало основного контента -->
     <main>
         <section class="organizer-section">
             <div class="container organizer-grid">
@@ -350,9 +356,7 @@
             <section id="last-year">
                 <h2>Как это было: Экспедиция 2025</h2>
                 <div class="results-grid">
-                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg">
-                        <!-- Карусель будет создана скриптом -->
-                    </div>
+                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg"></div>
                     <div class="results-content">
                         <h3>Итоги прошлой практики</h3>
                         <ul class="results-list">
@@ -369,9 +373,8 @@
                 <h2>Контакты</h2>
                 <p>По возникшим вопросам пишите на почту <a href="mailto:mv@latynin.org">mv@latynin.org</a> или в Telegram: <a href="https://t.me/MAX_V_L" target="_blank">@MAX_V_L</a></p>
             </section>
-        </div> <!-- /.container -->
+        </div>
     </main>
-    <!-- Конец основного контента -->
     
     <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar cta-bar--static">
         Подать заявку до 25 июня
@@ -391,7 +394,7 @@
                     slide.className = 'carousel-slide';
                     const img = document.createElement('img'); 
                     img.src = url.trim();
-                    img.alt = 'Фото с прошлой экспедиции'; // Добавил alt для доступности
+                    img.alt = 'Фото с прошлой экспедиции';
                     slide.appendChild(img); 
                     track.appendChild(slide);
                 });
@@ -399,12 +402,12 @@
                 const prevButton = document.createElement('button'); 
                 prevButton.className = 'carousel-button carousel-button--left'; 
                 prevButton.innerHTML = '&#10094;';
-                prevButton.setAttribute('aria-label', 'Предыдущий слайд'); // Для доступности
+                prevButton.setAttribute('aria-label', 'Предыдущий слайд');
 
                 const nextButton = document.createElement('button'); 
                 nextButton.className = 'carousel-button carousel-button--right'; 
                 nextButton.innerHTML = '&#10095;';
-                nextButton.setAttribute('aria-label', 'Следующий слайд'); // Для доступности
+                nextButton.setAttribute('aria-label', 'Следующий слайд');
                 
                 container.appendChild(track); 
                 container.appendChild(prevButton); 
@@ -413,6 +416,7 @@
                 let currentIndex = 0;
                 
                 const updateCarousel = () => {
+                    if (!track.querySelector('.carousel-slide')) return;
                     const slideWidth = track.querySelector('.carousel-slide').getBoundingClientRect().width;
                     track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
                 };
@@ -430,7 +434,7 @@
                 window.addEventListener('resize', () => { 
                     track.style.transition = 'none'; 
                     updateCarousel(); 
-                    track.offsetHeight; // Трюк для немедленного применения стилей
+                    track.offsetHeight;
                     track.style.transition = ''; 
                 });
                 

@@ -72,11 +72,12 @@
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('images/hero-background.jpg');
             background-size: cover; background-position: center; z-index: 1;
         }
-        .hero-content { position: relative; z-index: 2; }
+        .hero-content { position: relative; z-index: 2; width: 100%; }
         .hero h1 {
             font-family: var(--font-display);
-            /* Изменен clamp для лучшего сжатия на мобильных */
-            font-size: clamp(2.8rem, 12vw, 10rem); 
+            /* ИЗМЕНЕНИЕ 1: Скорректирован vw и добавлен overflow-wrap */
+            font-size: clamp(2.8rem, 11vw, 10rem); 
+            overflow-wrap: break-word;
             line-height: 1; margin: 0;
             letter-spacing: 0.05em; text-transform: uppercase;
         }
@@ -139,7 +140,7 @@
         .conditions-strip span { display: inline-block; border: 2px solid var(--color-accent); padding: 0.3rem 1rem; margin: 0 0.5rem; }
 
         /* БЛОК "ЗАДАЧИ КОМАНД" */
-        .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+        .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .task-card { border: 2px solid var(--color-accent); padding: 2rem; border-radius: 4px; }
         .task-card h3 { font-size: 2rem; margin: 0 0 1rem 0; color: var(--color-accent); }
         .task-card p { margin: 0; }
@@ -204,16 +205,14 @@
             body { font-size: 16px; line-height: 1.6; }
             .container { padding: 0 15px; }
             
-            /* Уменьшаем заголовки и убираем их верхний отступ */
             h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
             h3 { font-size: 1.8rem; }
             
-            /* Добавляем "воздух" между секциями на мобильных */
             main .container > section {
                 padding-top: 4rem;
             }
             main .container > section:first-of-type {
-                padding-top: 3rem; /* Для первой секции отступ чуть меньше */
+                padding-top: 3rem;
             }
 
             .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
@@ -261,7 +260,6 @@
     <div class="viewport-wrapper">
         <header class="hero">
             <div class="hero-background"></div>
-            <!-- Добавлен <br> для гарантированного переноса на мобильных -->
             <div class="hero-content"><h1>Зодчество<br>Вологодчины</h1></div>
         </header>
         <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar">

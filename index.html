@@ -146,7 +146,7 @@
         .conditions-strip span { display: inline-block; border: 2px solid var(--color-accent); padding: 0.3rem 1rem; margin: 0 0.5rem; }
 
         /* БЛОК "ЗАДАЧИ КОМАНД" */
-        .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
         .task-card { border: 2px solid var(--color-accent); padding: 2rem; border-radius: 4px; }
         .task-card h3 { font-size: 2rem; margin: 0 0 1rem 0; color: var(--color-accent); }
         .task-card p { margin: 0; }
@@ -157,10 +157,11 @@
         }
 
         /* БЛОК "КОГО МЫ ИЩЕМ" */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem; }
         .team-role { padding: 1.5rem; border-left: 4px solid var(--color-accent); background-color: #f9f9f9; }
         .team-role h4 { font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0; }
         .team-role p { margin: 0; color: #666; }
+        .team-role p small { color: #888; font-style: italic; }
         
         /* БЛОК "ИТОГИ ЭКСПЕДИЦИИ" */
         .outcomes-grid {
@@ -308,12 +309,8 @@
                 <p>В рамках экспедиции мы посетим ключевые города и архитектурные объекты в Череповце, Вологде, Соколе, Тотьме и архитектурно-этнографическом музее «Семёнково».</p>
                 <div class="stages-grid">
                     <div class="stage-item">
-                        <div class="stage-date">11 – 17 ИЮНЯ<br>2026</div>
-                        <div class="stage-description">Прием заявок для лидеров команд<small>В заявку необходимо догрузить портфолио</small></div>
-                    </div>
-                    <div class="stage-item">
                         <div class="stage-date">11 – 25 ИЮНЯ<br>2026</div>
-                        <div class="stage-description">Подача заявок участников на основе мотивационных писем</div>
+                        <div class="stage-description">Прием заявок для всех участников<small>Желающим стать лидерами команд необходимо подать заявку с портфолио до 17 июня.</small></div>
                     </div>
                     <div class="stage-item">
                         <div class="stage-date">26 – 30 июня</div>
@@ -362,24 +359,42 @@
 
             <section id="roles">
                 <h2>Кого мы ищем</h2>
-                <p>Мы формируем 3 междисциплинарные команды. База экспедиции находится в Государственном университете по землеустройству (ГУЗ), но мы приглашаем к участию студентов и молодых специалистов со всей страны, независимо от вашего вуза.</p>
-                <p>Для участия необходим рабочий ноутбук и портфолио с релевантными проектами.</p>
+                <p>Мы формируем 3 междисциплинарные команды. Экспедиция проводится Государственным университетом по землеустройству в партнёрстве с Череповецким государственным университетом, но мы приглашаем к участию студентов и молодых специалистов со всей страны, независимо от вашего вуза.</p>
                 <div class="team-grid">
-                    <div class="team-role"><h4>Архитектор-проектировщик</h4><p>Разработка функциональных планировок. Обязательное владение Revit или Archicad.</p></div>
-                    <div class="team-role"><h4>Архитектор-художник</h4><p>Разработка фасадных и объёмных решений. Уверенное владение SketchUp или Rhinoceros.</p></div>
-                    <div class="team-role"><h4>Визуализатор</h4><p>Создание фотореалистичных рендеров. Владение 3ds Max + Corona, Lumion или Enscape.</p></div>
-                    <div class="team-role"><h4>Исследователь</h4><p>Анализ, общение с экспертами, написание текстов. Навыки социолога или урбаниста.</p></div>
-                    <div class="team-role"><h4>Графический дизайнер</h4><p>Владение Adobe InDesign, Photoshop, Illustrator для фотофиксации, инфографики и вёрстки итогового альбома.</p></div>
-                    <div class="team-role"><h4>Лидер проектной группы</h4><p>Опыт управления командой, навыки постановки задач и контроля сроков. Обязательно прикрепление портфолио в заявку.</p></div>
+                    <div class="team-role">
+                        <h4>Лидер проектной группы</h4>
+                        <p>Управление командой, постановка задач и контроль сроков, ответственность и коммуникабельность. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
+                    </div>
+                    <div class="team-role">
+                        <h4>Архитектор-проектировщик</h4>
+                        <p>Разработка функциональных планировок. Владение Revit / Archicad /AutoCAD и т.п. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
+                    </div>
+                    <div class="team-role">
+                        <h4>Архитектор-художник</h4>
+                        <p>Разработка объёмных и фасадных решений. Владение SketchUp / Rhinoceros и т.п. Главное умение — создавать уникальные, выразительные образы.</p>
+                    </div>
+                    <div class="team-role">
+                        <h4>Визуализатор</h4>
+                        <p>Опыт работы с программами для визуализации (3ds Max+Corona/V-ray, Enscape, D5 render, Lumion, Twinmotion и т.п.) и владение графическими редакторами типа Photoshop.<br><small>Подача может быть и концептуальной, не обязательно фотореалистичной. Главное — чтобы она цепляла.</small></p>
+                    </div>
+                    <div class="team-role">
+                        <h4>Графический дизайнер</h4>
+                        <p>Владение Adobe InDesign, Photoshop и т.п. для фотофиксации, инфографики и вёрстки итогового альбома.</p>
+                    </div>
+                    <div class="team-role">
+                        <h4>Исследователь</h4>
+                        <p>Аналитическое мышление, коммуникативность, грамотное написание текстов. Навыки социолога или урбаниста приветствуются.</p>
+                    </div>
                 </div>
+                <p>Вы также можете предложить свой вариант роли для проектных групп, которая по-настоящему раскроет Ваши таланты и принесёт пользу всей команде.</p>
             </section>
             
             <section id="outcomes">
                 <h2>Итоги экспедиции</h2>
                 <ul class="outcomes-grid">
-                    <li>Итоговый альбом с тремя проектными решениями, аналитикой и визуализациями.</li>
+                    <li>Итоговый альбом с тремя проектными концепциями, аналитикой и визионерской подачей.</li>
                     <li>Сертификат об участии в программе «Открываем Россию заново».</li>
-                    <li>Прямая работа с администрацией города и реальный шанс на реализацию лучших проектов.</li>
+                    <li>Прямая работа с администрациями городов и реальный шанс на реализацию лучших проектов.</li>
                     <li>Сильный реальный кейс для вашего профессионального портфолио.</li>
                     <li>Возможность публикации лучших работ в профильных архитектурных медиа.</li>
                     <li>Опыт работы в междисциплинарной команде над сложной задачей.</li>
@@ -389,7 +404,7 @@
             <section id="last-year">
                 <h2>Как это было: Экспедиция 2025</h2>
                 <div class="results-grid">
-                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg"></div>
+                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg, images/last-year-5.jpg, images/last-year-6.jpg, images/last-year-7.jpg, images/last-year-8.jpg, images/last-year-9.jpg, images/last-year-10.jpg"></div>
                     <div class="results-content">
                         <h3>Итоги прошлой практики</h3>
                         <ul class="results-list">

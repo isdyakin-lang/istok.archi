@@ -1,496 +1,575 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зодчество Вологодчины 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Зодчество Вологодчины 2026</title>
+
+
+<style>
+    /* ПОДКЛЮЧЕНИЕ ЛОКАЛЬНЫХ ШРИФТОВ */
+    @font-face {
+        font-family: 'Belozersk';
+        src: url('fonts/Belozersk.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Roboto';
+        src: url('fonts/Roboto.ttf') format('truetype');
+        font-weight: 400; /* Обычное начертание */
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Roboto';
+        src: url('fonts/Roboto-Bold.ttf') format('truetype');
+        font-weight: 700; /* Жирное начертание */
+        font-style: normal;
+        font-display: swap;
+    }
+
+    :root {
+        --font-main: 'Roboto', sans-serif;
+        --font-display: 'Belozersk', sans-serif;
+        --color-text: #1a1a1a;
+        --color-background: #ffffff;
+        --color-accent: #0D47A1;
+        --color-accent-hover: #1976D2;
+        --color-dark-bg: #111111;
+        --color-light-grey-bg: #f4f4f4;
+        --container-width: 1100px;
+    }
+
+    /* ОБЩИЕ СТИЛИ */
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-main);
+        background-color: var(--color-background);
+        color: var(--color-text);
+        margin: 0;
+        font-size: 17px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        min-width: 320px;
+    }
+    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+    h2, h3 { font-family: var(--font-display); letter-spacing: 0.05em; }
+    h2 { font-size: 4rem; margin: 6rem 0 2rem 0; }
+    h2:first-child { margin-top: 0; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--color-accent); text-decoration: none; transition: color 0.3s, background-color 0.3s; }
+    a:hover { color: var(--color-accent-hover); }
     
-    <style>
-        /* ПОДКЛЮЧЕНИЕ ЛОКАЛЬНЫХ ШРИФТОВ */
-        @font-face {
-            font-family: 'Belozersk';
-            src: url('fonts/Belozersk.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Roboto';
-            src: url('fonts/Roboto.ttf') format('truetype');
-            font-weight: 400; /* Обычное начертание */
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Roboto';
-            src: url('fonts/Roboto-Bold.ttf') format('truetype');
-            font-weight: 700; /* Жирное начертание */
-            font-style: normal;
-            font-display: swap;
-        }
+    /* СТРУКТУРА ПЕРВОГО ЭКРАНА */
+    .viewport-wrapper { display: flex; flex-direction: column; height: 100vh; }
 
-        :root {
-            --font-main: 'Roboto', sans-serif;
-            --font-display: 'Belozersk', sans-serif;
-            --color-text: #1a1a1a;
-            --color-background: #ffffff;
-            --color-accent: #0D47A1;
-            --color-accent-hover: #1976D2;
-            --color-dark-bg: #111111;
-            --container-width: 1100px;
-        }
+    /* ГЛАВНЫЙ ЭКРАН */
+    .hero {
+        flex-grow: 1; display: flex; justify-content: center; align-items: center; text-align: center;
+        color: white; position: relative; background-color: var(--color-dark-bg); box-sizing: border-box; padding: 20px;
+    }
+    .hero-background {
+        position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('images/hero-background.jpg');
+        background-size: cover; background-position: center; z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; }
+    .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
+        line-height: 1; 
+        margin: 0;
+        letter-spacing: 0.05em; 
+        text-transform: uppercase;
+    }
 
-        /* ОБЩИЕ СТИЛИ */
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-main);
-            background-color: var(--color-background);
-            color: var(--color-text);
-            margin: 0;
-            font-size: 17px;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            min-width: 320px;
-        }
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
-        h2, h3 { font-family: var(--font-display); letter-spacing: 0.05em; }
-        h2 { font-size: 4rem; margin: 6rem 0 2rem 0; line-height: 1.1; }
-        img { max-width: 100%; height: auto; display: block; }
-        a { color: var(--color-accent); text-decoration: none; transition: color 0.3s, background-color 0.3s; }
-        a:hover { color: var(--color-accent-hover); }
+    /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */
+    .cta-bar {
+        display: block; background-color: var(--color-accent); color: white; text-decoration: none;
+        font-family: var(--font-main); font-weight: 700;
+        font-size: 2.2rem; letter-spacing: 0.1em;
+        padding: 25px 0; white-space: nowrap; overflow: hidden;
+        transition: background-color 0.3s ease;
+    }
+    .cta-bar:hover {
+        background-color: var(--color-accent-hover);
+        color: white;
+    }
+    .marquee-text { display: inline-block; padding-left: 100%; animation: marquee 30s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Стили для статичной кнопки внизу */
+    .cta-bar--static { text-align: center; white-space: normal; }
+
+    /* БЛОК РУКОВОДИТЕЛЯ */
+    .leader-section { background-color: var(--color-light-grey-bg); padding: 5rem 0; }
+    .leader-block {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+        align-items: flex-start;
+    }
+    .leader-photo { width: 100%; object-fit: cover; aspect-ratio: 1/1.2; border-radius: 4px; }
+    .leader-info h3 { font-size: 2rem; margin:0; }
+    .leader-info p { color: #555; margin-top: 0.5rem; font-size: 16px; }
+    .leader-info p:first-of-type { margin-top: 1.5rem; }
+
+    /* БЛОК ПАРТНЕРОВ (НА БЕЛОМ ФОНЕ) */
+    .partners-section { padding: 5rem 0; }
+    .partners-block { text-align: center; }
+    .partners-block h4 {
+        font-family: var(--font-main);
+        font-weight: 700; text-transform: uppercase; font-size: 1rem;
+        letter-spacing: 0.1em; color: #999; margin: 4rem 0 2rem 0;
+    }
+    .partners-block h4:first-child { margin-top: 0; }
+
+    .logo-grid {
+        display: grid;
+        gap: 2.5rem 2rem;
+        align-items: start;
+    }
+    .logo-grid--organizer {
+        grid-template-columns: 1fr;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    .logo-grid--partners {
+        grid-template-columns: repeat(5, 1fr); /* Изменено для 5 партнеров */
+    }
+    .logo-grid--info {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .logo-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .logo-item img {
+        height: 100px; /* Увеличенная высота логотипа */
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    .logo-item p {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--color-text);
+    }
+    .logo-item a { color: var(--color-text); }
+    .logo-item a:hover { color: var(--color-accent); }
+    
+    /* БЛОК ЭТАПОВ */
+    .stages-grid { margin-top: 3rem; display: grid; gap: 1.5rem; }
+    .stage-item {
+        display: grid; grid-template-columns: 250px 1fr; align-items: start;
+        padding-bottom: 1.5rem; border-bottom: 1px solid #eee;
+    }
+    .stage-item:last-child { border-bottom: none; }
+    .stage-date { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.05em; color: var(--color-accent); line-height: 1.2; }
+    .stage-description { font-size: 1.1rem; font-weight: 700; }
+    .stage-description small { display: block; font-weight: 400; color: #777; font-size: 0.9em; margin-top: 0.5rem; }
+
+    /* ПОЛОСКА С УСЛОВИЯМИ */
+    .conditions-strip { background-color: var(--color-light-grey-bg); text-align: center; padding: 2rem 0; margin-top: 4rem; }
+    .conditions-strip p { margin: 0; font-weight: 700; }
+    .conditions-strip span { display: inline-block; border: 2px solid var(--color-accent); padding: 0.3rem 1rem; margin: 0 0.5rem; }
+
+    /* БЛОК "ЗАДАЧИ КОМАНД" */
+    .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
+    .task-card { border: 2px solid var(--color-accent); padding: 2rem; border-radius: 4px; }
+    .task-card h3 { font-size: 2rem; margin: 0 0 1rem 0; color: var(--color-accent); }
+    .task-card p { margin: 0; }
+    .task-card .footnote {
+        font-size: 0.85em;
+        opacity: 0.7;
+        margin-top: 1em;
+    }
+
+    /* БЛОК "КОГО МЫ ИЩЕМ" */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem; }
+    .team-role { padding: 1.5rem; border-left: 4px solid var(--color-accent); background-color: #f9f9f9; }
+    .team-role h4 { font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0; }
+    .team-role p { margin: 0; color: #666; }
+    .team-role p small { color: #888; font-style: italic; }
+    
+    /* БЛОК "ИТОГИ ЭКСПЕДИЦИИ" */
+    .outcomes-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem 2.5rem; list-style: none; padding: 0; margin-top: 3rem;
+    }
+    .outcomes-grid li { font-weight: 700; padding-left: 30px; position: relative; }
+    .outcomes-grid li::before {
+        content: '✓'; position: absolute; left: 0; top: -2px; font-size: 1.2em;
+        color: var(--color-accent); font-weight: 900;
+    }
+
+    /* БЛОК "КАК ЭТО БЫЛО" И КАРУСЕЛЬ */
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .results-list { list-style-type: '✓ '; padding-left: 20px; margin: 0;}
+    .results-list li { margin-bottom: 1rem; font-size: 1.1rem; font-weight: 700; }
+    .results-list li:last-child { margin-bottom: 0; }
+    
+    .carousel { position: relative; overflow: hidden; border-radius: 4px; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-slide { min-width: 100%; box-sizing: border-box; }
+    .carousel-slide img { width: 100%; height: 500px; object-fit: cover; }
+    .carousel-button {
+        position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,0,0,0.3);
+        color: white; border-radius: 50%; border: none; font-size: 2.5rem;
+        cursor: pointer; width: 60px; height: 60px; z-index: 10; transition: background-color 0.3s;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .carousel-button:hover { background-color: rgba(0,0,0,0.6); }
+    .carousel-button--left { left: 10px; padding-right: 4px; }
+    .carousel-button--right { right: 10px; padding-left: 4px; }
+
+    /* БЛОК "КОНТАКТЫ" */
+    .contacts-section { background-color: var(--color-light-grey-bg); padding: 5rem 0; }
+    .contacts-content { text-align: center; }
+    .contacts-content p { font-size: 1.2rem; color: #555; margin-top: -1rem; }
+    
+    /* --- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+    @media (max-width: 992px) {
+        .leader-block { grid-template-columns: 1fr; text-align: center; }
+        .leader-photo { max-width: 300px; margin: 0 auto; }
+        .leader-info { margin-top: 2rem; }
         
-        /* СТРУКТУРА ПЕРВОГО ЭКРАНА */
-        .viewport-wrapper { display: flex; flex-direction: column; height: 100vh; }
+        .logo-grid--partners { grid-template-columns: repeat(3, 1fr); }
+        .logo-grid--info { grid-template-columns: repeat(3, 1fr); }
 
-        /* ГЛАВНЫЙ ЭКРАН */
-        .hero {
-            flex-grow: 1; display: flex; justify-content: center; align-items: center; text-align: center;
-            color: white; position: relative; background-color: var(--color-dark-bg); box-sizing: border-box; padding: 20px;
-        }
-        .hero-background {
-            position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('images/hero-background.jpg');
-            background-size: cover; background-position: center; z-index: 1;
-        }
-        .hero-content { position: relative; z-index: 2; width: 100%; }
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
-            line-height: 1; 
-            margin: 0;
-            letter-spacing: 0.05em; 
-            text-transform: uppercase;
-        }
+        .results-grid { grid-template-columns: 1fr; gap: 2rem; }
+        .carousel { order: 1; }
+        .results-content { order: 2; }
+    }
 
-        /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */
-        .cta-bar {
-            display: block; background-color: var(--color-accent); color: white; text-decoration: none;
-            font-family: var(--font-main); font-weight: 700;
-            font-size: 2.2rem; letter-spacing: 0.1em;
-            padding: 25px 0; white-space: nowrap; overflow: hidden;
-            transition: background-color 0.3s ease;
-        }
-        .cta-bar:hover {
-            background-color: var(--color-accent-hover);
-            color: white;
-        }
-        .marquee-text { display: inline-block; padding-left: 100%; animation: marquee 30s linear infinite; }
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* Стили для статичной кнопки внизу */
-        .cta-bar--static { text-align: center; white-space: normal; }
-
-        /* БЛОК РУКОВОДИТЕЛЯ И ПАРТНЕРОВ */
-        .organizer-section { background-color: #f4f4f4; padding: 4rem 0; }
-        .organizer-grid { display: grid; grid-template-columns: 300px 1.5fr 1fr; gap: 3rem; align-items: flex-start; }
-        .organizer-photo { width: 100%; object-fit: cover; aspect-ratio: 1/1.2; border-radius: 4px; }
-        .organizer-info h3 { font-size: 2rem; margin:0; }
-        .organizer-info p { color: #555; margin-top: 0.5rem; font-size: 16px; }
-        .organizer-info p:first-of-type { margin-top: 1.5rem; }
+    @media (max-width: 768px) {
+        body { font-size: 16px; line-height: 1.6; }
+        .container { padding: 0 15px; }
+        h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
+        main .container > section:not(:first-child) { padding-top: 5rem; }
         
-        .partners-list { margin-bottom: 2rem; }
-        .partners-list:last-child { margin-bottom: 0; }
-        .partners-list h4 {
-            font-family: var(--font-main);
-            font-weight: 700; text-transform: uppercase; font-size: 1rem;
-            letter-spacing: 0.1em; color: #999; margin: 0 0 1rem 0;
-        }
-        .partner-item { display: flex; align-items: center; margin-bottom: 1rem; }
-        .partner-item img {
-            height: 36px; width: 36px; object-fit: contain; margin-right: 15px; flex-shrink: 0;
-        }
-        .partner-item a { color: var(--color-text); font-size: 1.1rem; font-weight: 700; }
-        .partner-item a:hover { color: var(--color-accent); }
-        .partner-item:last-child { margin-bottom: 0; }
-        .partners-compact-list {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--color-text);
-            font-weight: 700;
-        }
-
-        /* БЛОК ЭТАПОВ */
-        .stages-grid { margin-top: 3rem; display: grid; gap: 1.5rem; }
-        .stage-item {
-            display: grid; grid-template-columns: 250px 1fr; align-items: start;
-            padding-bottom: 1.5rem; border-bottom: 1px solid #eee;
-        }
-        .stage-item:last-child { border-bottom: none; }
-        .stage-date { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.05em; color: var(--color-accent); line-height: 1.2; }
-        .stage-description { font-size: 1.1rem; font-weight: 700; }
-        .stage-description small { display: block; font-weight: 400; color: #777; font-size: 0.9em; margin-top: 0.5rem; }
-
-        /* ПОЛОСКА С УСЛОВИЯМИ */
-        .conditions-strip { background-color: #f4f4f4; text-align: center; padding: 2rem 0; margin-top: 4rem; }
-        .conditions-strip p { margin: 0; font-weight: 700; }
-        .conditions-strip span { display: inline-block; border: 2px solid var(--color-accent); padding: 0.3rem 1rem; margin: 0 0.5rem; }
-
-        /* БЛОК "ЗАДАЧИ КОМАНД" */
-        .tasks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
-        .task-card { border: 2px solid var(--color-accent); padding: 2rem; border-radius: 4px; }
-        .task-card h3 { font-size: 2rem; margin: 0 0 1rem 0; color: var(--color-accent); }
-        .task-card p { margin: 0; }
-        .task-card .footnote {
-            font-size: 0.85em;
-            opacity: 0.7;
-            margin-top: 1em;
-        }
-
-        /* БЛОК "КОГО МЫ ИЩЕМ" */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem; }
-        .team-role { padding: 1.5rem; border-left: 4px solid var(--color-accent); background-color: #f9f9f9; }
-        .team-role h4 { font-size: 1.2rem; font-weight: 700; margin: 0 0 0.5rem 0; }
-        .team-role p { margin: 0; color: #666; }
-        .team-role p small { color: #888; font-style: italic; }
+        .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+        .cta-bar { font-size: 1.5rem; padding: 20px 15px; }
         
-        /* БЛОК "ИТОГИ ЭКСПЕДИЦИИ" */
-        .outcomes-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem 2.5rem; list-style: none; padding: 0; margin-top: 3rem;
-        }
-        .outcomes-grid li { font-weight: 700; padding-left: 30px; position: relative; }
-        .outcomes-grid li::before {
-            content: '✓'; position: absolute; left: 0; top: -2px; font-size: 1.2em;
-            color: var(--color-accent); font-weight: 900;
-        }
-
-        /* БЛОК "КАК ЭТО БЫЛО" И КАРУСЕЛЬ */
-        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .results-list { list-style-type: '✓ '; padding-left: 20px; margin: 0;}
-        .results-list li { margin-bottom: 1rem; font-size: 1.1rem; font-weight: 700; }
-        .results-list li:last-child { margin-bottom: 0; }
+        .tasks-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        .stage-item { grid-template-columns: 1fr; gap: 0.5rem; }
+        .conditions-strip p { display: flex; flex-direction: column; gap: 0.5rem; }
         
-        .carousel { position: relative; overflow: hidden; border-radius: 4px; }
-        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-        .carousel-slide { min-width: 100%; box-sizing: border-box; }
-        .carousel-slide img { width: 100%; height: 500px; object-fit: cover; }
-        .carousel-button {
-            position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,0,0,0.3);
-            color: white; border-radius: 50%; border: none; font-size: 2.5rem;
-            cursor: pointer; width: 60px; height: 60px; z-index: 10; transition: background-color 0.3s;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .carousel-button:hover { background-color: rgba(0,0,0,0.6); }
-        .carousel-button--left { left: 10px; padding-right: 4px; }
-        .carousel-button--right { right: 10px; padding-left: 4px; }
+        .carousel-slide img { height: 350px; }
+        .contacts-section { padding: 4rem 0; }
+    }
 
-        /* БЛОК "КОНТАКТЫ" */
-        .contacts-section { text-align: center; }
-        .contacts-section p { font-size: 1.2rem; color: #555; margin-top: -1rem; }
-        
-        /* --- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+    @media (max-width: 576px) {
+        .logo-grid--partners, .logo-grid--info { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
 
-        @media (max-width: 992px) {
-            .organizer-grid { grid-template-columns: 1fr; text-align: center; }
-            .organizer-photo { max-width: 300px; margin: 0 auto; }
-            .organizer-info { margin-top: 2rem; }
-            .partners-info { margin-top: 2rem; }
-            .partner-item { justify-content: center; }
-
-            .results-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .carousel { order: 1; }
-            .results-content { order: 2; }
-        }
-
-        @media (max-width: 768px) {
-            body { font-size: 16px; line-height: 1.6; }
-            .container { padding: 0 15px; }
-            
-            h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
-            h3 { font-size: 1.8rem; }
-            
-            main .container > section { padding-top: 5rem; }
-            .organizer-section { padding: 4rem 15px; }
-            .conditions-strip { margin-top: 5rem; }
-
-            .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
-            .hero h1 { -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
-            .cta-bar { font-size: 1.5rem; padding: 20px 15px; }
-            
-            .tasks-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .task-card { padding: 1.5rem; }
-
-            .stage-item { grid-template-columns: 1fr; gap: 0.5rem; }
-            .stage-date { font-size: 1.5rem; }
-            .stage-description { font-size: 1rem; }
-            
-            .conditions-strip p { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-            .conditions-strip span { margin: 0.5rem 0; }
-            .outcomes-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .carousel-slide img { height: 350px; }
-            .contacts-section { padding-bottom: 4rem; }
-        }
-
-        @media (max-width: 480px) {
-            h2 { font-size: 2.2rem; }
-            .cta-bar { font-size: 1.2rem; letter-spacing: 0.05em; }
-            .carousel-slide img { height: 250px; }
-            .carousel-button { width: 45px; height: 45px; font-size: 1.8rem; }
-            .carousel-button--left { left: 5px; }
-            .carousel-button--right { right: 5px; }
-            .contacts-section p { font-size: 1rem; }
-        }
-    </style>
 </head>
 <body>
 
-    <div class="viewport-wrapper">
-        <header class="hero">
-            <div class="hero-background"></div>
-            <div class="hero-content"><h1>Зодчество<br>Вологодчины</h1></div>
-        </header>
-        <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar">
-            <div class="marquee-text">
-                <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
-                <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
+
+<div class="viewport-wrapper">
+    <header class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content"><h1>Зодчество<br>Вологодчины</h1></div>
+    </header>
+    <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar">
+        <div class="marquee-text">
+            <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
+            <span>ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • ПОДАТЬ ЗАЯВКУ • </span>
+        </div>
+    </a>
+</div>
+
+<main>
+    <div class="container">
+        <section id="description" style="padding-top: 5rem;">
+            <h2>Описание</h2>
+            <p>Современная застройка Вологодской области испытывает дефицит аутентичных решений. Новые микрорайоны обезличены по сравнению с историческими кварталами. Кейс экспедиции — разработка эскизных проектов для современного жилья, которые опираются на локальный архитектурный контекст, историческое наследие и передовые технологии, локализованные на Вологодчине.</p>
+            <p>В рамках экспедиции мы посетим значимые города региона - Вологду, Череповец, Сокол и Тотьму. Изучим истоки народного зодчества в архитектурно-этнографическом музее Семёнково. Проведём ряд воркшопов и встреч с местными проектировщиками, управлениями архитектуры и градостроительства, краеведами и местными жителями.</p>
+            <div class="stages-grid">
+                <div class="stage-item">
+                    <div class="stage-date">11 – 25 ИЮНЯ<br>2026</div>
+                    <div class="stage-description">Прием заявок для всех участников<small>Желающим стать лидерами команд необходимо подать заявку с портфолио до 17 июня.</small></div>
+                </div>
+                <div class="stage-item">
+                    <div class="stage-date">26 – 30 июня</div>
+                    <div class="stage-description">Детализация программы и отправление итоговой заявки</div>
+                </div>
+                <div class="stage-item">
+                    <div class="stage-date">1 июля – 31 августа</div>
+                    <div class="stage-description">Подготовительный этап<small>Будет несколько онлайн-встреч команды и офлайн-встреч (для жителей Москвы и Подмосковья)</small></div>
+                </div>
+                <div class="stage-item">
+                    <div class="stage-date">1 – 13 сентября</div>
+                    <div class="stage-description">Даты проведения экспедиции «Зодчество Вологодчины»</div>
+                </div>
+                <div class="stage-item">
+                    <div class="stage-date">14 – 28 сентября</div>
+                    <div class="stage-description">Отчёт команды о проделанной работе ключевым партнёрам</div>
+                </div>
             </div>
-        </a>
+        </section>
     </div>
 
-    <main>
-        <section class="organizer-section">
-            <div class="container organizer-grid">
-                <img src="images/organizer-photo.jpg" alt="Фотография Максима Латынина" class="organizer-photo">
-                <div class="organizer-info">
-                    <h3>Латынин Максим Валерьевич</h3>
-                    <p>Руководитель экспедиции. Архитектор, сооснователь проектной артели ИСТОК, преподаватель ГУЗ и ЧГУ.</p>
-                    <p>Автор научных публикаций по архитектуре Вологодской области. Организатор студенческой экспедиции «АрхиВыезд 2025», нацеленной на глубокое исследование и переосмысление локальных архитектурных кодов.</p>
+    <section class="conditions-strip">
+        <p>Институциональные партнёры покрывают расходы на: <span>Переезд</span> <span>Проживание</span> <span>Питание</span></p>
+    </section>
+
+    <div class="container">
+        <section id="tasks" style="padding-top: 5rem;">
+            <h2>Задачи команд</h2>
+            <p>Задачи команд проектных групп — разработка эскизных проектов, учитывающих региональные особенности и локализованные строительные инновации (CLT, Cor-Ten и т.д.):</p>
+            <div class="tasks-grid">
+                <div class="task-card">
+                    <h3>Проектная группа 1</h3>
+                    <p>Разработка проекта индивидуального жилого дома, который переосмысляет традиционный северный дом и адаптирует его для современной семьи с использованием CLT-панелей.</p>
                 </div>
-                <div class="partners-info">
-                    <div class="partners-list">
-                        <h4>Спонсоры</h4>
-                        <div class="partner-item"><a href="https://openrussia.rsv.ru/" target="_blank">Программа «Открываем Россию заново»</a></div>
-                    </div>
-                    <div class="partners-list">
-                        <h4>Партнеры</h4>
-                        <div class="partners-compact-list">
-                            BN Group • ГУЗ • ЧГУ • БПОУ Сокольский ЛПТ • Управление архитектуры Череповца
-                        </div>
-                    </div>
-                    <div class="partners-list">
-                        <h4>Информационные партнеры</h4>
-                        <div class="partner-item">
-                            <img src="images/logo-vataga.jpg" alt="Логотип Ватага">
-                            <a href="https://t.me/vataganew" target="_blank">!ВАТАГА</a>
-                        </div>
-                        <div class="partner-item">
-                            <img src="images/logo-chernuha.jpg" alt="Логотип Чернуха">
-                            <a href="https://t.me/chernuhaguz" target="_blank">Чернуха</a>
-                        </div>
-                    </div>
+                <div class="task-card">
+                    <h3>Проектная группа 2</h3>
+                    <p>Переосмысление в современном контексте дома вологодского типа на 4 семьи. Создать комфортное жилье с учётом характерной вологодской архитектурно-планировочной типологии.</p>
+                </div>
+                <div class="task-card">
+                    <h3>Проектная группа 3</h3>
+                    <p>Создание концепции малоэтажного или среднеэтажного жилого дома (5-8 этажей)* для городов Вологодчины, учитывающий местный контекст и гармонично вписывающийся в существующую застройку.</p>
+                    <p class="footnote">*Согласно СП 42.13330.2016</p>
                 </div>
             </div>
         </section>
 
-        <div class="container">
-            <section id="description">
-                <h2>Описание</h2>
-                <p>Современная застройка Вологодской области испытывает дефицит аутентичных решений. Новые микрорайоны обезличены по сравнению с историческими кварталами. Кейс экспедиции — разработка эскизных проектов для современного жилья, которые опираются на локальный архитектурный контекст, наследие и передовые CLT-технологии, изготавливаемые в той же области.</p>
-                <p>В рамках экспедиции мы посетим ключевые города и архитектурные объекты в Череповце, Вологде, Соколе, Тотьме и архитектурно-этнографическом музее «Семёнково».</p>
-                <div class="stages-grid">
-                    <div class="stage-item">
-                        <div class="stage-date">11 – 25 ИЮНЯ<br>2026</div>
-                        <div class="stage-description">Прием заявок для всех участников<small>Желающим стать лидерами команд необходимо подать заявку с портфолио до 17 июня.</small></div>
-                    </div>
-                    <div class="stage-item">
-                        <div class="stage-date">26 – 30 июня</div>
-                        <div class="stage-description">Детализация программы и отправление итоговой заявки</div>
-                    </div>
-                    <div class="stage-item">
-                        <div class="stage-date">1 июля – 31 августа</div>
-                        <div class="stage-description">Подготовительный этап<small>Будет несколько онлайн-встреч команды и офлайн-встреч (для жителей Москвы и Подмосковья)</small></div>
-                    </div>
-                    <div class="stage-item">
-                        <div class="stage-date">1 – 13 сентября</div>
-                        <div class="stage-description">Даты проведения экспедиции «Зодчество Вологодчины»</div>
-                    </div>
-                    <div class="stage-item">
-                        <div class="stage-date">14 – 28 сентября</div>
-                        <div class="stage-description">Отчёт команды о проделанной работе ключевым партнёрам</div>
-                    </div>
+        <section id="roles" style="padding-top: 5rem;">
+            <h2>Кого мы ищем</h2>
+            <p>Мы формируем 3 междисциплинарные команды. Экспедиция проводится Государственным университетом по землеустройству в партнёрстве с Череповецким государственным университетом, но мы приглашаем к участию студентов и молодых специалистов со всей страны, независимо от вашего вуза.</p>
+            <div class="team-grid">
+                <div class="team-role">
+                    <h4>Лидер проектной группы</h4>
+                    <p>Управление командой, постановка задач и контроль сроков, ответственность и коммуникабельность. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
                 </div>
-            </section>
-        </div>
-
-        <section class="conditions-strip">
-            <p>Организаторы покрывают расходы на <span>Переезд</span> <span>Проживание</span> <span>Питание</span></p>
+                <div class="team-role">
+                    <h4>Архитектор-проектировщик</h4>
+                    <p>Разработка функциональных планировок. Владение Revit / Archicad /AutoCAD и т.п. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
+                </div>
+                <div class="team-role">
+                    <h4>Архитектор-художник</h4>
+                    <p>Разработка объёмных и фасадных решений. Владение SketchUp / Rhinoceros и т.п. Главное умение — создавать уникальные, выразительные образы.</p>
+                </div>
+                <div class="team-role">
+                    <h4>Визуализатор</h4>
+                    <p>Опыт работы с программами для визуализации (3ds Max+Corona/V-ray, Enscape, D5 render, Lumion, Twinmotion и т.п.) и владение графическими редакторами типа Photoshop.<br><small>Подача может быть и концептуальной, не обязательно фотореалистичной. Главное — чтобы она цепляла.</small></p>
+                </div>
+                <div class="team-role">
+                    <h4>Графический дизайнер</h4>
+                    <p>Владение Adobe InDesign, Photoshop и т.п. для фотофиксации, инфографики и вёрстки итогового альбома.</p>
+                </div>
+                <div class="team-role">
+                    <h4>Исследователь</h4>
+                    <p>Аналитическое мышление, коммуникативность, грамотное написание текстов. Навыки социолога или урбаниста приветствуются.</p>
+                </div>
+            </div>
+            <p>Вы также можете предложить свой вариант роли для проектных групп, которая по-настоящему раскроет Ваши таланты и принесёт пользу всей команде.</p>
+        </section>
+        
+        <section id="outcomes" style="padding-top: 5rem;">
+            <h2>Итоги экспедиции</h2>
+            <ul class="outcomes-grid">
+                <li>Итоговый альбом с тремя проектными концепциями, аналитикой и визионерской подачей.</li>
+                <li>Сертификат об участии в программе «Открываем Россию заново».</li>
+                <li>Прямая работа с администрациями городов и реальный шанс на реализацию лучших проектов.</li>
+                <li>Сильный реальный кейс для вашего профессионального портфолио.</li>
+                <li>Возможность публикации лучших работ в профильных архитектурных медиа.</li>
+                <li>Опыт работы в междисциплинарной команде над сложной задачей.</li>
+                <li>Документ в вуз об отсутствии на учёбе по уважительной причине для каждого участника.</li>
+            </ul>
         </section>
 
-        <div class="container">
-            <section id="tasks">
-                <h2>Задачи команд</h2>
-                <p>Задачи команд проектных групп — разработка эскизных проектов, учитывающих региональные особенности и локализованные строительные инновации (CLT, Cor-Ten и т.д.):</p>
-                <div class="tasks-grid">
-                    <div class="task-card">
-                        <h3>Проектная группа 1</h3>
-                        <p>Разработка проекта индивидуального жилого дома, который переосмысляет традиционный северный дом и адаптирует его для современной семьи с использованием CLT-панелей.</p>
-                    </div>
-                    <div class="task-card">
-                        <h3>Проектная группа 2</h3>
-                        <p>Переосмысление в современном контексте дома вологодского типа на 4 семьи. Создать комфортное жилье с учётом характерной вологодской архитектурно-планировочной типологии.</p>
-                    </div>
-                    <div class="task-card">
-                        <h3>Проектная группа 3</h3>
-                        <p>Создание концепции малоэтажного или среднеэтажного жилого дома (5-8 этажей)* для городов Вологодчины, учитывающий местный контекст и гармонично вписывающийся в существующую застройку.</p>
-                        <p class="footnote">*Согласно СП 42.13330.2016</p>
-                    </div>
+        <section id="last-year" style="padding-top: 5rem;">
+            <h2>Как это было: Экспедиция 2025</h2>
+            <div class="results-grid">
+                <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg, images/last-year-5.jpg, images/last-year-6.jpg, images/last-year-7.jpg, images/last-year-8.jpg, images/last-year-9.jpg, images/last-year-10.jpg"></div>
+                <div class="results-content">
+                    <h3>Итоги прошлой практики</h3>
+                    <ul class="results-list">
+                        <li>Начато взаимодействие с Управлением архитектуры Череповца.</li>
+                        <li>Проведен совместный мастер-класс для студентов и практиков.</li>
+                        <li>Результаты легли в основу научных публикаций и докладов.</li>
+                        <li>Сформирована основа для более масштабной экспедиции 2026 года.</li>
+                    </ul>
                 </div>
-            </section>
-
-            <section id="roles">
-                <h2>Кого мы ищем</h2>
-                <p>Мы формируем 3 междисциплинарные команды. Экспедиция проводится Государственным университетом по землеустройству в партнёрстве с Череповецким государственным университетом, но мы приглашаем к участию студентов и молодых специалистов со всей страны, независимо от вашего вуза.</p>
-                <div class="team-grid">
-                    <div class="team-role">
-                        <h4>Лидер проектной группы</h4>
-                        <p>Управление командой, постановка задач и контроль сроков, ответственность и коммуникабельность. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
-                    </div>
-                    <div class="team-role">
-                        <h4>Архитектор-проектировщик</h4>
-                        <p>Разработка функциональных планировок. Владение Revit / Archicad /AutoCAD и т.п. Наличие опыта работы с выбранной типологией дома (в т.ч. на уровне курсового проекта).</p>
-                    </div>
-                    <div class="team-role">
-                        <h4>Архитектор-художник</h4>
-                        <p>Разработка объёмных и фасадных решений. Владение SketchUp / Rhinoceros и т.п. Главное умение — создавать уникальные, выразительные образы.</p>
-                    </div>
-                    <div class="team-role">
-                        <h4>Визуализатор</h4>
-                        <p>Опыт работы с программами для визуализации (3ds Max+Corona/V-ray, Enscape, D5 render, Lumion, Twinmotion и т.п.) и владение графическими редакторами типа Photoshop.<br><small>Подача может быть и концептуальной, не обязательно фотореалистичной. Главное — чтобы она цепляла.</small></p>
-                    </div>
-                    <div class="team-role">
-                        <h4>Графический дизайнер</h4>
-                        <p>Владение Adobe InDesign, Photoshop и т.п. для фотофиксации, инфографики и вёрстки итогового альбома.</p>
-                    </div>
-                    <div class="team-role">
-                        <h4>Исследователь</h4>
-                        <p>Аналитическое мышление, коммуникативность, грамотное написание текстов. Навыки социолога или урбаниста приветствуются.</p>
-                    </div>
-                </div>
-                <p>Вы также можете предложить свой вариант роли для проектных групп, которая по-настоящему раскроет Ваши таланты и принесёт пользу всей команде.</p>
-            </section>
-            
-            <section id="outcomes">
-                <h2>Итоги экспедиции</h2>
-                <ul class="outcomes-grid">
-                    <li>Итоговый альбом с тремя проектными концепциями, аналитикой и визионерской подачей.</li>
-                    <li>Сертификат об участии в программе «Открываем Россию заново».</li>
-                    <li>Прямая работа с администрациями городов и реальный шанс на реализацию лучших проектов.</li>
-                    <li>Сильный реальный кейс для вашего профессионального портфолио.</li>
-                    <li>Возможность публикации лучших работ в профильных архитектурных медиа.</li>
-                    <li>Опыт работы в междисциплинарной команде над сложной задачей.</li>
-                </ul>
-            </section>
-
-            <section id="last-year">
-                <h2>Как это было: Экспедиция 2025</h2>
-                <div class="results-grid">
-                    <div class="carousel" data-images="images/last-year-1.jpg, images/last-year-2.jpg, images/last-year-3.jpg, images/last-year-4.jpg, images/last-year-5.jpg, images/last-year-6.jpg, images/last-year-7.jpg, images/last-year-8.jpg, images/last-year-9.jpg, images/last-year-10.jpg"></div>
-                    <div class="results-content">
-                        <h3>Итоги прошлой практики</h3>
-                        <ul class="results-list">
-                            <li>Начато взаимодействие с Управлением архитектуры Череповца.</li>
-                            <li>Проведен совместный мастер-класс для студентов и практиков.</li>
-                            <li>Результаты легли в основу научных публикаций и докладов.</li>
-                            <li>Сформирована основа для более масштабной экспедиции 2026 года.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="contacts-section">
-                <h2>Контакты</h2>
-                <p>По возникшим вопросам пишите на почту <a href="mailto:mv@latynin.org">mv@latynin.org</a> или в Telegram: <a href="https://t.me/MAX_V_L" target="_blank">@MAX_V_L</a></p>
-            </section>
-        </div>
-    </main>
+            </div>
+        </section>
+    </div>
+</main>
     
-    <a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar cta-bar--static">
-        Подать заявку
-    </a>
+<section class="leader-section" id="organizers">
+    <div class="container">
+        <h2>Организаторы и партнеры</h2>
+        <div class="leader-block">
+            <img src="images/organizer-photo.jpg" alt="Фотография Максима Латынина" class="leader-photo">
+            <div class="leader-info">
+                <h3>Латынин Максим Валерьевич</h3>
+                <p>Руководитель экспедиции. Архитектор, сооснователь проектной артели ИСТОК, преподаватель ГУЗ и ЧГУ.</p>
+                <p>Автор научных публикаций по архитектуре Вологодской области. Организатор студенческой экспедиции «АрхиВыезд 2025», нацеленной на глубокое исследование и переосмысление локальных архитектурных кодов.</p>
+                <p>Экспедиция реализуется при поддержке программы Росмолодёжи «Больше чем путешествие» в рамках профессионального конкурса «<a href="https://openrussia.rsv.ru/" target="_blank">Открываем Россию заново</a>».</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            function createCarousel(container) {
-                const imageUrls = container.dataset.images.split(',').filter(url => url.trim() !== '');
-                if (imageUrls.length === 0) return;
-                
-                const track = document.createElement('div'); 
-                track.className = 'carousel-track';
-                
-                imageUrls.forEach(url => {
-                    const slide = document.createElement('div'); 
-                    slide.className = 'carousel-slide';
-                    const img = document.createElement('img'); 
-                    img.src = url.trim();
-                    img.alt = 'Фото с прошлой экспедиции';
-                    slide.appendChild(img); 
-                    track.appendChild(slide);
-                });
-                
-                const prevButton = document.createElement('button'); 
-                prevButton.className = 'carousel-button carousel-button--left'; 
-                prevButton.innerHTML = '&#10094;';
-                prevButton.setAttribute('aria-label', 'Предыдущий слайд');
+<section class="partners-section">
+    <div class="container">
+        <div class="partners-block">
+            <h4>Организатор</h4>
+            <div class="logo-grid logo-grid--organizer">
+                <div class="logo-item">
+                    <img src="images/logo-guz.jpg" alt="Логотип Государственного университета по землеустройству">
+                    <p>Государственный университет по землеустройству</p>
+                </div>
+            </div>
 
-                const nextButton = document.createElement('button'); 
-                nextButton.className = 'carousel-button carousel-button--right'; 
-                nextButton.innerHTML = '&#10095;';
-                nextButton.setAttribute('aria-label', 'Следующий слайд');
-                
-                container.appendChild(track); 
-                container.appendChild(prevButton); 
-                container.appendChild(nextButton);
-                
-                let currentIndex = 0;
-                
-                const updateCarousel = () => {
-                    if (!track.querySelector('.carousel-slide')) return;
-                    const slideWidth = track.querySelector('.carousel-slide').getBoundingClientRect().width;
-                    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-                };
-                
-                prevButton.addEventListener('click', () => { 
-                    currentIndex = currentIndex === 0 ? imageUrls.length - 1 : currentIndex - 1; 
-                    updateCarousel(); 
-                });
-                
-                nextButton.addEventListener('click', () => { 
-                    currentIndex = currentIndex === imageUrls.length - 1 ? 0 : currentIndex + 1; 
-                    updateCarousel(); 
-                });
-                
-                window.addEventListener('resize', () => { 
-                    track.style.transition = 'none'; 
-                    updateCarousel(); 
-                    track.offsetHeight;
-                    track.style.transition = ''; 
-                });
-                
-                updateCarousel();
-            }
+            <h4>Партнёры</h4>
+            <div class="logo-grid logo-grid--partners">
+                <div class="logo-item">
+                    <img src="images/logo-chgu.jpg" alt="Логотип Череповецкого государственного университета">
+                    <p>Череповецкий государственный университет</p>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logo-sokol-lpt.jpg" alt="Логотип Сокольского ЛПТ">
+                    <p>БПОУ Сокольский ЛПТ</p>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logo-uaig-cher.jpg" alt="Логотип УАиГ мэрии города Череповца">
+                    <p>УАиГ мэрии города Череповца</p>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logo-uaig-sokol.jpg" alt="Логотип УАиГ Администрации Сокольского муниципального округа">
+                    <p>УАиГ Администрации Сокольского МО</p>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logo-bn-group.jpg" alt="Логотип BN Group">
+                    <p>BN Group</p>
+                </div>
+            </div>
+
+            <h4>Информационные партнеры</h4>
+            <div class="logo-grid logo-grid--info">
+                <div class="logo-item">
+                    <a href="https://t.me/vataganew" target="_blank">
+                        <img src="images/logo-vataga.jpg" alt="Логотип Ватага">
+                        <p>!ВАТАГА</p>
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="https://t.me/chernuhaguz" target="_blank">
+                        <img src="images/logo-chernuha.jpg" alt="Логотип Чернуха">
+                        <p>Чернуха</p>
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="https://t.me/derevyanstvo" target="_blank">
+                        <img src="images/logo-derevyanstvo.jpg" alt="Логотип Деревянство">
+                        <p>Деревянство</p>
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="https://t.me/osamgsu" target="_blank">
+                        <img src="images/logo-osa.jpg" alt="Логотип ОСА МГСУ">
+                        <p>ОСА МГСУ</p>
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="https://t.me/ObshestvoArhitektorov" target="_blank">
+                        <img src="images/logo-marphi.jpg" alt="Логотип Общество архитекторов">
+                        <p>Общество архитекторов</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contacts-section">
+    <div class="container">
+        <div class="contacts-content">
+            <h2>Контакты</h2>
+            <p>По возникшим вопросам пишите на почту <a href="mailto:mv@latynin.org">mv@latynin.org</a> или в Telegram: <a href="https://t.me/MAX_V_L" target="_blank">@MAX_V_L</a></p>
+        </div>
+    </div>
+</section>
+
+<a href="https://forms.yandex.ru/u/699eb3496d2d73a3d9a9f9ba" target="_blank" class="cta-bar cta-bar--static">
+    Подать заявку
+</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        function createCarousel(container) {
+            const imageUrls = container.dataset.images.split(',').filter(url => url.trim() !== '');
+            if (imageUrls.length === 0) return;
             
-            document.querySelectorAll('.carousel').forEach(createCarousel);
-        });
-    </script>
+            const track = document.createElement('div'); 
+            track.className = 'carousel-track';
+            
+            imageUrls.forEach(url => {
+                const slide = document.createElement('div'); 
+                slide.className = 'carousel-slide';
+                const img = document.createElement('img'); 
+                img.src = url.trim();
+                img.alt = 'Фото с прошлой экспедиции';
+                slide.appendChild(img); 
+                track.appendChild(slide);
+            });
+            
+            const prevButton = document.createElement('button'); 
+            prevButton.className = 'carousel-button carousel-button--left'; 
+            prevButton.innerHTML = '&#10094;';
+            prevButton.setAttribute('aria-label', 'Предыдущий слайд');
+
+            const nextButton = document.createElement('button'); 
+            nextButton.className = 'carousel-button carousel-button--right'; 
+            nextButton.innerHTML = '&#10095;';
+            nextButton.setAttribute('aria-label', 'Следующий слайд');
+            
+            container.appendChild(track); 
+            container.appendChild(prevButton); 
+            container.appendChild(nextButton);
+            
+            let currentIndex = 0;
+            
+            const updateCarousel = () => {
+                if (!track.querySelector('.carousel-slide')) return;
+                const slideWidth = track.querySelector('.carousel-slide').getBoundingClientRect().width;
+                track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+            };
+            
+            prevButton.addEventListener('click', () => { 
+                currentIndex = currentIndex === 0 ? imageUrls.length - 1 : currentIndex - 1; 
+                updateCarousel(); 
+            });
+            
+            nextButton.addEventListener('click', () => { 
+                currentIndex = currentIndex === imageUrls.length - 1 ? 0 : currentIndex + 1; 
+                updateCarousel(); 
+            });
+            
+            window.addEventListener('resize', () => { 
+                track.style.transition = 'none'; 
+                updateCarousel(); 
+                track.offsetHeight;
+                track.style.transition = ''; 
+            });
+            
+            updateCarousel();
+        }
+        
+        document.querySelectorAll('.carousel').forEach(createCarousel);
+    });
+</script>
+
 </body>
 </html>

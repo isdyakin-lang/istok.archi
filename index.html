@@ -78,8 +78,7 @@
     .hero-content { position: relative; z-index: 2; width: 100%; }
     .hero h1 {
         font-family: var(--font-display);
-        /* --- ИСПРАВЛЕНО (финальная версия): Настроена функция clamp для более плавного и сильного уменьшения шрифта на мобильных --- */
-        font-size: clamp(2.5rem, 9.5vw, 9.5rem); 
+        font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
         line-height: 1.1; 
         margin: 0;
         letter-spacing: 0.05em; 
@@ -273,7 +272,15 @@
         .logo-grid--partners, .logo-grid--info { grid-template-columns: repeat(2, 1fr); }
     }
     
-    /* --- ИСПРАВЛЕНО (финальная версия): Добавлено правило для очень узких экранов, чтобы заголовок "Организаторы..." умещался --- */
+    /* --- ИСПРАВЛЕНО (финальная, надежная версия): 
+    Добавлено отдельное правило для заголовка на мобильных, чтобы гарантировать его вмещение --- */
+    @media (max-width: 480px) {
+        .hero h1 {
+            font-size: 12vw; /* Использование vw для более гибкого уменьшения */
+            letter-spacing: 0.02em; /* Уменьшаем межбуквенное расстояние */
+        }
+    }
+
     @media (max-width: 380px) {
         h2 {
             font-size: 2.3rem;

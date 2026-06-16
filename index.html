@@ -83,10 +83,9 @@
         margin: 0;
         letter-spacing: 0.05em; 
         text-transform: uppercase;
-        /* --- ИСПРАВЛЕНИЕ: Добавлено для корректного переноса длинных слов на мобильных устройствах --- */
+        /* --- ИСПРАВЛЕНО (версия 2): Добавлен принудительный перенос слов --- */
         overflow-wrap: break-word;
-        word-wrap: break-word; /* Для совместимости со старыми браузерами */
-        hyphens: auto;
+        word-break: break-word;
     }
 
     /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */
@@ -151,14 +150,17 @@
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        /* --- ИСПРАВЛЕНО (версия 2): Добавлено для надежного центрирования текста --- */
+        text-align: center;
     }
     .logo-item img {
-        height: 100px; 
+        height: 100px;
         width: auto;
         max-width: 100%;
         object-fit: contain;
-        /* --- ИСПРАВЛЕНИЕ: Добавлено для надежного центрирования логотипа по горизонтали --- */
-        margin: 0 auto;
+        /* --- ИСПРАВЛЕНО (версия 2): Добавлено для надежного центрирования изображения --- */
+        margin-left: auto;
+        margin-right: auto;
     }
     .logo-item p {
         margin: 0;
@@ -260,10 +262,9 @@
         h2 { 
             font-size: 2.8rem; 
             margin: 0 0 1.5rem 0;
-            /* --- ИСПРАВЛЕНИЕ: Добавлено для переноса длинных заголовков на мобильных устройствах --- */
+            /* --- ИСПРАВЛЕНО (версия 2): Добавлен принудительный перенос слов --- */
             overflow-wrap: break-word;
-            word-wrap: break-word;
-            hyphens: auto;
+            word-break: break-word;
         }
         main .container > section:not(:first-child) { padding-top: 5rem; }
         

@@ -78,8 +78,7 @@
     .hero-content { position: relative; z-index: 2; width: 100%; }
     .hero h1 {
         font-family: var(--font-display);
-        /* --- ИСПРАВЛЕНО: ШРИФТ СДЕЛАН ЕЩЕ МЕНЬШЕ НА МОБИЛЬНЫХ --- */
-        font-size: clamp(1.8rem, 8.5vw, 9.5rem); 
+        font-size: 9.5rem;
         line-height: 1.1; 
         margin: 0;
         letter-spacing: 0.05em; 
@@ -255,8 +254,10 @@
     @media (max-width: 768px) {
         body { font-size: 16px; line-height: 1.6; }
         .container { padding: 0 15px; }
-        /* --- ИСПРАВЛЕНО: ШРИФТ СДЕЛАН ЕЩЕ МЕНЬШЕ НА МОБИЛЬНЫХ --- */
+        /* --- РЕШЕНИЕ: Жестко задаем маленький размер шрифта для телефонов --- */
+        .hero h1 { font-size: 12vw; }
         h2 { font-size: 2.2rem; margin: 0 0 1.5rem 0; }
+
         main .container > section:not(:first-child) { padding-top: 5rem; }
         
         .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
@@ -274,7 +275,12 @@
         .logo-grid--partners, .logo-grid--info { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 380px) {
+    /* --- РЕШЕНИЕ: Самый жесткий вариант для самых маленьких экранов --- */
+    @media (max-width: 420px) {
+        .hero h1 {
+            font-size: 34px; /* Фиксированный размер, который точно влезет */
+            line-height: 1.15;
+        }
         h2 {
             font-size: 2rem;
         }

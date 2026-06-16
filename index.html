@@ -78,14 +78,12 @@
     .hero-content { position: relative; z-index: 2; width: 100%; }
     .hero h1 {
         font-family: var(--font-display);
-        font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
-        line-height: 1; 
+        /* --- ИСПРАВЛЕНО (финальная версия): Настроена функция clamp для более плавного и сильного уменьшения шрифта на мобильных --- */
+        font-size: clamp(2.5rem, 9.5vw, 9.5rem); 
+        line-height: 1.1; 
         margin: 0;
         letter-spacing: 0.05em; 
         text-transform: uppercase;
-        /* --- ИСПРАВЛЕНО (версия 2): Добавлен принудительный перенос слов --- */
-        overflow-wrap: break-word;
-        word-break: break-word;
     }
 
     /* АНИМИРОВАННАЯ ПОЛОСА "ПОДАТЬ ЗАЯВКУ" */
@@ -150,7 +148,6 @@
         flex-direction: column;
         align-items: center;
         gap: 1rem;
-        /* --- ИСПРАВЛЕНО (версия 2): Добавлено для надежного центрирования текста --- */
         text-align: center;
     }
     .logo-item img {
@@ -158,7 +155,6 @@
         width: auto;
         max-width: 100%;
         object-fit: contain;
-        /* --- ИСПРАВЛЕНО (версия 2): Добавлено для надежного центрирования изображения --- */
         margin-left: auto;
         margin-right: auto;
     }
@@ -259,13 +255,7 @@
     @media (max-width: 768px) {
         body { font-size: 16px; line-height: 1.6; }
         .container { padding: 0 15px; }
-        h2 { 
-            font-size: 2.8rem; 
-            margin: 0 0 1.5rem 0;
-            /* --- ИСПРАВЛЕНО (версия 2): Добавлен принудительный перенос слов --- */
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
+        h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
         main .container > section:not(:first-child) { padding-top: 5rem; }
         
         .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
@@ -281,6 +271,13 @@
 
     @media (max-width: 576px) {
         .logo-grid--partners, .logo-grid--info { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    /* --- ИСПРАВЛЕНО (финальная версия): Добавлено правило для очень узких экранов, чтобы заголовок "Организаторы..." умещался --- */
+    @media (max-width: 380px) {
+        h2 {
+            font-size: 2.3rem;
+        }
     }
 </style>
 

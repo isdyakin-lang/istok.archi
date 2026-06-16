@@ -78,7 +78,8 @@
     .hero-content { position: relative; z-index: 2; width: 100%; }
     .hero h1 {
         font-family: var(--font-display);
-        font-size: clamp(1.8rem, 11.5vw, 9.5rem); 
+        /* --- ИСПРАВЛЕНО: Уменьшен коэффициент масштабирования для мобильных --- */
+        font-size: clamp(2rem, 10vw, 9.5rem); 
         line-height: 1.1; 
         margin: 0;
         letter-spacing: 0.05em; 
@@ -254,7 +255,8 @@
     @media (max-width: 768px) {
         body { font-size: 16px; line-height: 1.6; }
         .container { padding: 0 15px; }
-        h2 { font-size: 2.8rem; margin: 0 0 1.5rem 0; }
+        /* --- ИСПРАВЛЕНО: Уменьшен размер шрифта для мобильных --- */
+        h2 { font-size: 2.5rem; margin: 0 0 1.5rem 0; }
         main .container > section:not(:first-child) { padding-top: 5rem; }
         
         .hero-background { top: 10px; left: 10px; right: 10px; bottom: 10px; }
@@ -271,19 +273,10 @@
     @media (max-width: 576px) {
         .logo-grid--partners, .logo-grid--info { grid-template-columns: repeat(2, 1fr); }
     }
-    
-    /* --- ИСПРАВЛЕНО (финальная, надежная версия): 
-    Добавлено отдельное правило для заголовка на мобильных, чтобы гарантировать его вмещение --- */
-    @media (max-width: 480px) {
-        .hero h1 {
-            font-size: 12vw; /* Использование vw для более гибкого уменьшения */
-            letter-spacing: 0.02em; /* Уменьшаем межбуквенное расстояние */
-        }
-    }
 
     @media (max-width: 380px) {
         h2 {
-            font-size: 2.3rem;
+            font-size: 2.2rem;
         }
     }
 </style>
